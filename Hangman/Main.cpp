@@ -58,6 +58,16 @@ std::string guessesString = "";
 std::array<char, 26> guesses;
 int numberOfFailedAttempts = 0;
 
+void reset()
+{
+	numberOfFailedAttempts = 0;
+	guessesString = "";
+	for (int i = 0; i < 6; i++)
+	{
+		correctLetters[i] = false;
+	}
+	guesses.empty();
+}
 
 void set_text_colour(int foreground, int background)
 {
@@ -211,6 +221,7 @@ void playGame()
 			}
 		}
 	}
+	reset();
 }
 
 int main()
