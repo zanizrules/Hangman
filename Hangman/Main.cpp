@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iterator>
 #include <cstring>
+#include <ctime>
 
 enum Colours
 {
@@ -50,7 +51,8 @@ std::array<std::string, 8> hangman =
 	"  ___|___                     "
 };
 
-std::string secretWord = "SECRET";
+std::string secretWords[10] = { "SECRET", "SIMPLE", "MOBILE", "GERMAN", "ROBOTS", "CANDLE", "LIGHTS", "PARROT", "GIANTS", "BOTTLE" };
+std::string secretWord = "";
 bool correctLetters[6] = { false, false, false, false, false, false };
 
 std::string getSecretWordString();
@@ -66,7 +68,6 @@ void reset()
 	{
 		correctLetters[i] = false;
 	}
-	guesses.empty();
 }
 
 void set_text_colour(int foreground, int background)
@@ -149,9 +150,10 @@ bool invalidLetter(char c)
 
 void playGame()
 {
+	secretWord = secretWords[(rand() % 10)]; // Assign random word
 	bool playing = true;
 	char userInput = '0';
-
+	
 	while (playing)
 	{
 
@@ -226,6 +228,7 @@ void playGame()
 
 int main()
 {
+	srand(time(0));
 	drawTitle(hangmanTitle, LIGHTRED);
 
 	std::cout << std::endl;
